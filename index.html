@@ -10,6 +10,8 @@
 <script type="text/javascript">
 var 画板, 画;
 var 文件 = document;
+var 原x = 0, 原y = 0;
+var 已画第一点 = false;
 function 处理加载() {
 	画板 = 文件.getElementById("画板");
 	画 = 画板.getContext('2d');
@@ -18,8 +20,17 @@ function 处理加载() {
 }
 
 function 处理鼠标移动(事件) {
-	画.lineTo((事件.clientX - 画板.offsetLeft), (事件.clientY - 画板.offsetTop));
+	if (!已画第一点) {
+		原x = (事件.clientX - 画板.offsetLeft);
+		原y = (事件.clientY - 画板.offsetTop);
+		已画第一点 = true;
+		return;
+	}
+	画.beginPath();
+	画.moveTo(原x, 原y);
+	画.lineTo(原x = (事件.clientX - 画板.offsetLeft), 原y = (事件.clientY - 画板.offsetTop));
 	画.stroke();
+
 }
 window.onload = 处理加载;
 </script>
