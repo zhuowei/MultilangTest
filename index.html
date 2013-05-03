@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Multilang test - 多语言试验</title>
+</head>
+<body>
+<canvas id="画板" width="640" height="480">
+</canvas>
+<script type="text/javascript">
+var 画板, 画;
+var 文件 = document;
+function 处理加载() {
+	画板 = 文件.getElementById("画板");
+	画 = 画板.getContext('2d');
+	画板.onmousemove = 处理鼠标移动;
+	//画.moveTo(0, 0);
+}
+
+function 处理鼠标移动(事件) {
+	画.lineTo((事件.clientX - 画板.offsetLeft), (事件.clientY - 画板.offsetTop));
+	画.stroke();
+}
+window.onload = 处理加载;
+</script>
+</body>
+</html>
